@@ -8,20 +8,20 @@ class Product {
 }
 
 void main() {
-  // Sample product list
+ 
   List<Product> products = [
     Product("DELl", 200000),
     Product("TOshiba", 30000),
     Product("Mac", 200000),
   ];
 
-  // Display product list
+ 
   print("Products:");
   for (int i = 0; i < products.length; i++) {
     print("${i + 1}. ${products[i].name} - Rs. ${products[i].price}");
   }
 
-  // User input for product selection
+
   print("Enter product number (1-${products.length}) or 'q' to quit:");
   String? productInput = stdin.readLineSync();
 
@@ -31,12 +31,12 @@ void main() {
     if (productIndex > 0 && productIndex <= products.length) {
       Product selectedProduct = products[productIndex - 1];
 
-      // User input for quantity
+
       print("Enter quantity:");
       String? quantityInput = stdin.readLineSync();
       int quantity = int.tryParse(quantityInput!) ?? 1;
 
-      // Delivery option selection
+
       print("Select delivery option:");
       print("1. Home (Rs. 1000)");
       print("2. Pickup (Rs. Free)");
@@ -55,7 +55,7 @@ void main() {
         }
       }
 
-      // Packing option selection
+
       print("Select packing option:");
       print("1. Plastic (Rs. 500)");
       print("2. Standard Bag Packing (Rs. 1000)");
@@ -78,7 +78,7 @@ void main() {
         }
       }
 
-      // Location selection
+
       print("Select location:");
       print("1. Kathmandu");
       print("2. Latipur");
@@ -101,12 +101,11 @@ void main() {
         }
       }
 
-      // Calculate subtotal, tax (assumed 10%), and grand total
       double subtotal = quantity * selectedProduct.price;
       double tax = subtotal * 0.10;
       double grandTotal = subtotal + tax + deliveryCost + packingCost;
 
-      // Display final bill
+
       print("\nYour Order:");
       print(" - Product: ${selectedProduct.name} (x$quantity)");
       print(" - Subtotal: Rs. $subtotal");
