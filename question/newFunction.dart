@@ -5,18 +5,21 @@ class MarksCalculator {
   List<int> marks = [];
 
   void inputSubjects() {
-    print("Enter the names of five subjects:");
+    print(
+        "Enter the names of five subjects from the list [Social, Maths, CFA, English, Digital Logic]:");
     for (var i = 0; i < 5; i++) {
       stdout.write("Subject name: ");
       var subject = stdin.readLineSync();
       if (subject != null &&
           subject.isNotEmpty &&
-          !subject.contains(RegExp(r'[0-9]'))) {
+          ['Social', 'Maths', 'CFA', 'English', 'Digital Logic']
+              .contains(subject) &&
+          !subjects.contains(subject)) {
         subjects.add(subject);
       } else {
         print(
-            "Error: Please enter a valid subject name (only letters and spaces).");
-        i--; // Retry input for the same subject
+            "Error: Please enter a unique subject from the list [Social, Maths, CFA, English, Digital Logic].");
+        i--; 
       }
     }
   }
@@ -24,19 +27,23 @@ class MarksCalculator {
   void inputMarks() {
     print("Enter marks obtained in each subject:");
     for (var subject in subjects) {
-      stdout.write("Marks obtained in $subject: ");
-      var markInput = stdin.readLineSync();
-      if (markInput != null &&
-          markInput.isNotEmpty &&
-          markInput.contains(RegExp(r'^[0-9]+$'))) {
-        var mark = int.parse(markInput);
-        marks.add(mark);
-      } else {
-        print("Error: Please enter a valid integer value for marks.");
-        marks.clear(); // Clear marks list to retry input for all subjects
-        inputMarks(); // Retry input for all subjects
-        return;
-      }
+      int? mark;
+      do {
+        stdout.write("Marks obtained in $subject: ");
+        var markInput = stdin.readLineSync();
+        if (markInput != null &&
+            markInput.isNotEmpty &&
+            markInput.contains(RegExp(r'^[0-9]+$'))) {
+          mark = int.tryParse(markInput);
+          if (mark != null && mark >= 0 && mark <= 100) {
+            marks.add(mark);
+          } else {
+            print("Error: Marks should be between 0 and 100.");
+          }
+        } else {
+          print("Error: Please enter a valid integer value for marks.");
+        }
+      } while (mark == null);
     }
   }
 
@@ -58,4 +65,3 @@ void main() {
   // Method 3: Calculate total marks
   marksCalculator.calculateTotalMarks();
 }
-
