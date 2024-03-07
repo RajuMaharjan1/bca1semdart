@@ -52,8 +52,12 @@ class MarksCalculator {
     print("Total marks: $totalMarks");
   }
 }
+void test(int  ){
+    
+}
 
 void main() {
+  
   var marksCalculator = MarksCalculator();
 
   // Method 1: Asking subjects from the user
